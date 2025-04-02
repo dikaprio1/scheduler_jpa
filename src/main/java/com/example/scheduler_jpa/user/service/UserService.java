@@ -44,8 +44,8 @@ public class UserService {
     public void updateUser(Long id, UserUpdateRequestDto requestDto){
         User user = userRepository.findByIdOrElseThrow(id);
 
-        if(requestDto.getUsername() != null){
-            user.setUserName(requestDto.getUsername());
+        if(requestDto.getUserName() != null){
+            user.setUserName(requestDto.getUserName());
         }
         if(requestDto.getEmail() != null){
             user.setEmail(requestDto.getEmail());

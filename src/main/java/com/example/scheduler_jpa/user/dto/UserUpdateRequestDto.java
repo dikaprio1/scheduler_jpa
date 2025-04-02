@@ -8,11 +8,11 @@ import lombok.Setter;
 public class UserUpdateRequestDto {
     private String email;
     private String password;
-    private String username;
+    private String userName;
 
     public UserUpdateRequestDto(String email, String password, String username) {
         this.email = email;
         this.password = password;
-        this.username = username;
+        this.userName = userName;
     }
 }
