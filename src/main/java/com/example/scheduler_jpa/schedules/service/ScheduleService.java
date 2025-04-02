@@ -48,4 +48,8 @@ public class ScheduleService {
             schedule.setContents(requestDto.getContents());
         }
     }
+    public void delete(Long id){
+        Schedule schedule = scheduleRepository.findByIdOrElseThrow(id);
+        scheduleRepository.delete(schedule);
+    }
 }
