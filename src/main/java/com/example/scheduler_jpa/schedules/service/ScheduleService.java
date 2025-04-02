@@ -1,10 +1,12 @@
 package com.example.scheduler_jpa.schedules.service;
 
 import com.example.scheduler_jpa.schedules.dto.ScheduleResponseDto;
+import com.example.scheduler_jpa.schedules.dto.ScheduleUpdateRequestDto;
 import com.example.scheduler_jpa.schedules.entity.Schedule;
 import com.example.scheduler_jpa.schedules.repository.ScheduleRepository;
 import com.example.scheduler_jpa.user.entity.User;
 import com.example.scheduler_jpa.user.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -34,5 +36,16 @@ public class ScheduleService {
     public ScheduleResponseDto findById(Long id){
         Schedule findSchedule = scheduleRepository.findByIdOrElseThrow(id);
         return new ScheduleResponseDto(findSchedule.getId(), findSchedule.getTitle(), findSchedule.getContents(), findSchedule.getUser().getId());
+    }
+    @Transactional
+    public void updateSchedule(Long id, ScheduleUpdateRequestDto requestDto){
+        Schedule schedule = scheduleRepository.findByIdOrElseThrow(id);
+
+        if(requestDto.getTitle() != null){
+            schedule.setTitle(requestDto.getTitle());
+        }
+        if(requestDto.getContents() != null){
+            schedule.setContents(requestDto.getContents());
+        }
     }
 }

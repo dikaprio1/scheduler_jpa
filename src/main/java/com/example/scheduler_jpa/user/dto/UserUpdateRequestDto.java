@@ -10,7 +10,7 @@ public class UserUpdateRequestDto {
     private String password;
     private String userName;
 
-    public UserUpdateRequestDto(String email, String password, String username) {
+    public UserUpdateRequestDto(String email, String password, String userName) {
         this.email = email;
         this.password = password;
         this.userName = userName;

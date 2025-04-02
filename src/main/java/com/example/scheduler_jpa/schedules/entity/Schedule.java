@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+@Setter
 @Getter
 @Entity
 @Table(name = "schedule")
@@ -21,7 +22,6 @@ public class Schedule extends BaseEntity {
     @Column(columnDefinition = "longtext")
     private String contents;
 
-    @Setter
     @ManyToOne
     @JoinColumn(name="user_id")
     private User user;
