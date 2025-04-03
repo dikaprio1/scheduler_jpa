@@ -2,6 +2,7 @@ package com.example.scheduler_jpa.user.dto;
 
 import lombok.Getter;
 
+//유저 등록 요청 dto
 @Getter
 public class SignUpRequestDto {
     private final String userName;

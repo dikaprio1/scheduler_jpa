@@ -21,24 +21,25 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
 
+    //회원가입(유저 등록)
     @PostMapping("/signup")
     public ResponseEntity<SignResponseDto> signUp(@Valid @RequestBody SignUpRequestDto requestDto){
         SignResponseDto signResponseDto = userService.signUp(requestDto.getUserName(),requestDto.getEmail(),requestDto.getPassword());
         return new ResponseEntity<>(signResponseDto, HttpStatus.CREATED);
     }
-
+    //유저 조회
     @GetMapping
     public ResponseEntity<List<UserResponseDto>> findAll(){
         List<UserResponseDto> userList = userService.findAll();
         return new ResponseEntity<>(userList,HttpStatus.OK);
     }
-
+    //특정 유저 조회
     @GetMapping("/{id}")
     public ResponseEntity<UserResponseDto> findById(@PathVariable Long id){
         UserResponseDto userResponseDto = userService.findById(id);
         return new ResponseEntity<>(userResponseDto,HttpStatus.OK);
     }
-
+    //유저 정보 수정
     @PutMapping("/{id}")
     public ResponseEntity<String> updateUser(@PathVariable Long id,@RequestBody UserUpdateRequestDto requestDto){
         userService.updateUser(id,requestDto);
@@ -46,6 +47,7 @@ public class UserController {
         log.info("응답 메시지: {}", responseMessage);
         return ResponseEntity.ok(responseMessage);
     }
+    //유저 정보 삭제
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable Long id){
         userService.deleteUser(id);

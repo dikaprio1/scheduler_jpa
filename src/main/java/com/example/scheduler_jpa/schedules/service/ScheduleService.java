@@ -19,6 +19,7 @@ public class ScheduleService {
     private final ScheduleRepository scheduleRepository;
     private final UserRepository userRepository;
 
+    // 스케줄을 등록하는 주요 서비스
     public ScheduleResponseDto save(String title, String contents, HttpSession session){
         String email = (String) session.getAttribute("user");
         if (email == null) {
@@ -34,14 +35,18 @@ public class ScheduleService {
         return new ScheduleResponseDto(schedule.getId(),schedule.getTitle(),schedule.getContents(),schedule.getUser().getId());
     }
 
+    // 모든 스케줄을 조회하는 메서드
     public List<ScheduleResponseDto> findAll(){
         return scheduleRepository.findAll().stream().map(ScheduleResponseDto::todto).toList();
     }
 
+    // 하나의 스케줄을 조회하는 메서드
     public ScheduleResponseDto findById(Long id){
         Schedule findSchedule = scheduleRepository.findByIdOrElseThrow(id);
         return new ScheduleResponseDto(findSchedule.getId(), findSchedule.getTitle(), findSchedule.getContents(), findSchedule.getUser().getId());
     }
+
+    //스케줄 수정하는 메서드
     @Transactional
     public void updateSchedule(Long id, ScheduleUpdateRequestDto requestDto){
         Schedule schedule = scheduleRepository.findByIdOrElseThrow(id);
@@ -53,6 +58,7 @@ public class ScheduleService {
             schedule.setContents(requestDto.getContents());
         }
     }
+    //스케줄 삭제하는 메서드
     public void delete(Long id){
         Schedule schedule = scheduleRepository.findByIdOrElseThrow(id);
         scheduleRepository.delete(schedule);

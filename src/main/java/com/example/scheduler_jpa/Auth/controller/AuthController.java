@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
     private final AuthService authService;
 
+    // 회원 로그인 메서드
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest, HttpServletRequest request) {
         if (authService.login(loginRequest.getEmail(),loginRequest.getPassword(), request)) {

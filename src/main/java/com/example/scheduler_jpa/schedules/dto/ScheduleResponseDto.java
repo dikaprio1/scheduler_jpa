@@ -3,6 +3,8 @@ package com.example.scheduler_jpa.schedules.dto;
 import com.example.scheduler_jpa.schedules.entity.Schedule;
 import lombok.Getter;
 
+
+// 스케줄 요청에 의한 반환 dto
 @Getter
 public class ScheduleResponseDto {
     private final Long id;

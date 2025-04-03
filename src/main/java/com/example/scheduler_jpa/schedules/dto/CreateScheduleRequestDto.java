@@ -2,6 +2,7 @@ package com.example.scheduler_jpa.schedules.dto;
 
 import lombok.Getter;
 
+//스케줄 등록 dto
 @Getter
 public class CreateScheduleRequestDto {
     private final String title;

@@ -20,23 +20,28 @@ import java.util.List;
 public class ScheduleController {
     private final ScheduleService scheduleService;
 
+    // 스케줄 등록
     @PostMapping
     public ResponseEntity<ScheduleResponseDto> save(@RequestBody CreateScheduleRequestDto requestDto, HttpSession session){
         ScheduleResponseDto scheduleResponseDto = scheduleService.save(requestDto.getTitle(),requestDto.getContents(),session);
         return new ResponseEntity<>(scheduleResponseDto,HttpStatus.CREATED);
     }
+
+    // 등록되어있는 스케줄 목록 조회
     @GetMapping
     public ResponseEntity<List<ScheduleResponseDto>> findAll(){
         List<ScheduleResponseDto> scheduleResponseDtoList = scheduleService.findAll();
         return new ResponseEntity<>(scheduleResponseDtoList,HttpStatus.OK);
     }
 
+    // 등록되어있는 스케줄 1개 조회
     @GetMapping("/{id}")
     public ResponseEntity<ScheduleResponseDto> findById(@PathVariable Long id){
         ScheduleResponseDto scheduleResponseDto = scheduleService.findById(id);
         return new ResponseEntity<>(scheduleResponseDto,HttpStatus.OK);
     }
 
+    // 등록되어있는 스케줄 수정
     @PutMapping("/{id}")
     public ResponseEntity<String> updateSchedule(@PathVariable Long id,@RequestBody ScheduleUpdateRequestDto requestDto){
         scheduleService.updateSchedule(id,requestDto);
@@ -45,6 +50,7 @@ public class ScheduleController {
         return ResponseEntity.ok(responseMessage);
     }
 
+    // 등록되어있는 스케줄 삭제
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id){
         scheduleService.delete(id);

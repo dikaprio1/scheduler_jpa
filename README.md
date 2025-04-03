@@ -37,11 +37,11 @@ src/
 ## 6. 코드 구조
 ### 6.1 주요 클래스
 - **SchedulerApplication.java**: Spring Boot 애플리케이션 실행 진입점
-- **ScheduleService.java**: 스케줄 등록을하는 서비스 클래스
+- **ScheduleService.java**: 스케줄 CRUD하는 서비스 클래스
 - **ScheduleController.java**: REST API를 제공하는 컨트롤러
 - **ScheduleRepository.java**: JPA 기반의 데이터 액세스 레이어
 - **Schedule.java**: 스케줄 작업을 저장하는 JPA 엔티티
-- **UserService.java**: 유저 등록을하는 서비스 클래스
+- **UserService.java**: 유저 CRUD하는 서비스 클래스
 - **UserController.java**: REST API를 제공하는 컨트롤러
 - **UserRepository.java**: JPA 기반의 데이터 액세스 레이어
 - **User.java**: 유저을 저장하는 JPA 엔티티

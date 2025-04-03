@@ -13,7 +13,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AuthService {
     private final UserRepository userRepository;
-
+    // 로그인 주요 기능을 담당하는 로그인 서비스단
     public boolean login(String email, String password, HttpServletRequest request) {
         Optional<User> userOptional = userRepository.findByEmail(email);
 
