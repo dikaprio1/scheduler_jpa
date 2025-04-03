@@ -6,12 +6,14 @@ import com.example.scheduler_jpa.user.dto.UserResponseDto;
 import com.example.scheduler_jpa.user.dto.UserUpdateRequestDto;
 import com.example.scheduler_jpa.user.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
@@ -37,13 +39,17 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateUser(@PathVariable Long id,@RequestBody UserUpdateRequestDto requestDto){
+    public ResponseEntity<String> updateUser(@PathVariable Long id,@RequestBody UserUpdateRequestDto requestDto){
         userService.updateUser(id,requestDto);
-        return new ResponseEntity<>(HttpStatus.OK);
+        String responseMessage = "사용자 정보(ID: " + id + ")가 성공적으로 업데이트되었습니다.";
+        log.info("응답 메시지: {}", responseMessage);
+        return ResponseEntity.ok(responseMessage);
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id){
+    public ResponseEntity<String> deleteUser(@PathVariable Long id){
         userService.deleteUser(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        String responseMessage = "사용자 정보(ID: " + id + ")가 성공적으로 삭제되었습니다.";
+        log.info("응답 메시지: {}", responseMessage);
+        return ResponseEntity.ok(responseMessage);
     }
 }

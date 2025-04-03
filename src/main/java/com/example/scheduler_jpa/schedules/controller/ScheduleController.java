@@ -6,12 +6,14 @@ import com.example.scheduler_jpa.schedules.dto.ScheduleUpdateRequestDto;
 import com.example.scheduler_jpa.schedules.service.ScheduleService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/schedules")
 @RequiredArgsConstructor
@@ -36,15 +38,19 @@ public class ScheduleController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateSchedule(@PathVariable Long id,@RequestBody ScheduleUpdateRequestDto requestDto){
+    public ResponseEntity<String> updateSchedule(@PathVariable Long id,@RequestBody ScheduleUpdateRequestDto requestDto){
         scheduleService.updateSchedule(id,requestDto);
-        return new ResponseEntity<>(HttpStatus.OK);
+        String responseMessage = "스케줄 정보(ID: " + id + ")가 성공적으로 업데이트되었습니다.";
+        log.info("응답 메시지: {}", responseMessage);
+        return ResponseEntity.ok(responseMessage);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id){
+    public ResponseEntity<String> delete(@PathVariable Long id){
         scheduleService.delete(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        String responseMessage = "스케줄 정보(ID: " + id + ")가 성공적으로 삭제되었습니다.";
+        log.info("응답 메시지: {}", responseMessage);
+        return ResponseEntity.ok(responseMessage);
     }
 
 }
