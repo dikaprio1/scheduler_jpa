@@ -10,7 +10,7 @@ import java.io.IOException;
 
 @WebFilter("/*") // 모든 요청을 필터링
 public class LoginFilter implements Filter {
-    private static final String[] WHITE_LIST = {"/", "/user/signup", "/login", "/logout"};
+//    private static final String[] WHITE_LIST = {"/", "/users/signup", "/login"};
     @Override
     public void doFilter(
             ServletRequest request,
@@ -23,7 +23,7 @@ public class LoginFilter implements Filter {
         HttpSession session = httpRequest.getSession(false);
         String path = httpRequest.getRequestURI();
 
-        if (path.startsWith("/users/signup") || path.startsWith("/auth/login")) {
+        if (path.startsWith("/users/signup") || path.startsWith("/auth/login") || path.startsWith("/")) {
             chain.doFilter(request, response);
             return;
         }

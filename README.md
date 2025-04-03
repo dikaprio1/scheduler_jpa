@@ -66,3 +66,4 @@ spring.jpa.hibernate.ddl-auto=update
 
 
 ## 10. API 명세서
+https://documenter.getpostman.com/view/43316803/2sB2cSfiSe

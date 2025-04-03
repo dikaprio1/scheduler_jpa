@@ -20,7 +20,7 @@ public class ScheduleService {
     private final UserRepository userRepository;
 
     public ScheduleResponseDto save(String title, String contents, HttpSession session){
-        String email = (String) session.getAttribute("userEmail");
+        String email = (String) session.getAttribute("user");
         if (email == null) {
             throw new IllegalStateException("로그인이 필요합니다.");
         }
