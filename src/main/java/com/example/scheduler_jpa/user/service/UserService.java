@@ -1,5 +1,6 @@
 package com.example.scheduler_jpa.user.service;
 
+import com.example.scheduler_jpa.config.PasswordEncoder;
 import com.example.scheduler_jpa.user.dto.SignResponseDto;
 import com.example.scheduler_jpa.user.dto.UserResponseDto;
 import com.example.scheduler_jpa.user.dto.UserUpdateRequestDto;
@@ -18,9 +19,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public SignResponseDto signUp(String userName, String email,String password){
-        User user = new User(userName,email,password);
+        String encodedPassword = passwordEncoder.encode(password);
+        User user = new User(userName,email,encodedPassword);
         User saveUser = userRepository.save(user);
 
         return new SignResponseDto(saveUser.getUserName(),saveUser.getEmail());

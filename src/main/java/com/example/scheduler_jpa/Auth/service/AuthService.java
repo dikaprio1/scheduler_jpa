@@ -1,5 +1,6 @@
 package com.example.scheduler_jpa.Auth.service;
 
+import com.example.scheduler_jpa.config.PasswordEncoder;
 import com.example.scheduler_jpa.user.entity.User;
 import com.example.scheduler_jpa.user.repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,6 +14,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AuthService {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
     // 로그인 주요 기능을 담당하는 로그인 서비스단
     public boolean login(String email, String password, HttpServletRequest request) {
         Optional<User> userOptional = userRepository.findByEmail(email);
@@ -20,7 +22,7 @@ public class AuthService {
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             //비밀번호를 단순 문자열 비교
-            if (password.equals(user.getPassword())) {
+            if (passwordEncoder.matches(password, user.getPassword())) {
                 // 세션 생성 및 유저 정보 저장
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user.getEmail());
