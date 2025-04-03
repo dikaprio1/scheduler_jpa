@@ -5,6 +5,7 @@ import com.example.scheduler_jpa.user.dto.SignUpRequestDto;
 import com.example.scheduler_jpa.user.dto.UserResponseDto;
 import com.example.scheduler_jpa.user.dto.UserUpdateRequestDto;
 import com.example.scheduler_jpa.user.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -21,7 +22,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/signup")
-    public ResponseEntity<SignResponseDto> signUp(@RequestBody SignUpRequestDto requestDto){
+    public ResponseEntity<SignResponseDto> signUp(@Valid @RequestBody SignUpRequestDto requestDto){
         SignResponseDto signResponseDto = userService.signUp(requestDto.getUserName(),requestDto.getEmail(),requestDto.getPassword());
         return new ResponseEntity<>(signResponseDto, HttpStatus.CREATED);
     }

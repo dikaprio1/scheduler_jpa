@@ -3,6 +3,7 @@ package com.example.scheduler_jpa.schedules.entity;
 import com.example.scheduler_jpa.BaseEntity;
 import com.example.scheduler_jpa.user.entity.User;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,6 +17,7 @@ public class Schedule extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Size(max = 10)
     @Column(nullable = false)
     private String title;
 
