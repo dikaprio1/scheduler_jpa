@@ -6,6 +6,7 @@ import com.example.scheduler_jpa.schedules.entity.Schedule;
 import com.example.scheduler_jpa.schedules.repository.ScheduleRepository;
 import com.example.scheduler_jpa.user.entity.User;
 import com.example.scheduler_jpa.user.repository.UserRepository;
+import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,9 +19,13 @@ public class ScheduleService {
     private final ScheduleRepository scheduleRepository;
     private final UserRepository userRepository;
 
-    public ScheduleResponseDto save(String title, String contents, Long id){
-        User findUser = userRepository.findByIdOrElseThrow(id);
+    public ScheduleResponseDto save(String title, String contents, HttpSession session){
+        String email = (String) session.getAttribute("userEmail");
+        if (email == null) {
+            throw new IllegalStateException("로그인이 필요합니다.");
+        }
 
+        User findUser = userRepository.findByEmailOrElseThrow(email);
         Schedule schedule = new Schedule(title,contents);
         schedule.setUser(findUser);
 

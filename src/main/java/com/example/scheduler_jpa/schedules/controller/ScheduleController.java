@@ -4,6 +4,7 @@ import com.example.scheduler_jpa.schedules.dto.CreateScheduleRequestDto;
 import com.example.scheduler_jpa.schedules.dto.ScheduleResponseDto;
 import com.example.scheduler_jpa.schedules.dto.ScheduleUpdateRequestDto;
 import com.example.scheduler_jpa.schedules.service.ScheduleService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +19,8 @@ public class ScheduleController {
     private final ScheduleService scheduleService;
 
     @PostMapping
-    public ResponseEntity<ScheduleResponseDto> save(@RequestBody CreateScheduleRequestDto requestDto){
-        ScheduleResponseDto scheduleResponseDto = scheduleService.save(requestDto.getTitle(),requestDto.getContents(),requestDto.getId());
+    public ResponseEntity<ScheduleResponseDto> save(@RequestBody CreateScheduleRequestDto requestDto, HttpSession session){
+        ScheduleResponseDto scheduleResponseDto = scheduleService.save(requestDto.getTitle(),requestDto.getContents(),session);
         return new ResponseEntity<>(scheduleResponseDto,HttpStatus.CREATED);
     }
     @GetMapping
